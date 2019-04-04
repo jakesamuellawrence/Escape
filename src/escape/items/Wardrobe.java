@@ -5,15 +5,15 @@ import escape.TextManager;
 public class Wardrobe extends DefaultItem{
 	
 	public Wardrobe(){
-		name = "Wardrobe";
-		description = "An old-looking wooden wardrobe";
+		name = "wardrobe";
+		description = "an old-looking wooden wardrobe";
 	}
 	
 	@Override
 	public void lookAt(){
 		TextManager.say("You investigate the cupboard further. It seems to be made of a rich mahoganny. "
 				      + "Whomever locked you in this room clearly has expensive tastes. Looking at the door, "
-				      + "you see a strangely shaped keyhole, and next to it the words 'Open me ;)'");
+				      + "you see a strangely shaped keyhole, and next to it the words 'Open me ;)' scrawled on a note");
 	}
 	
 	@Override
