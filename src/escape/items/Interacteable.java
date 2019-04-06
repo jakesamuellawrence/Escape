@@ -9,4 +9,6 @@ public interface Interacteable{
 	public void use();
 	public void useWith(Interacteable target);
 	public void pickUp();
+	public void open();
+	public void close();
 }

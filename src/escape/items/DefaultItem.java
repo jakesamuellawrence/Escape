@@ -27,6 +27,16 @@ public class DefaultItem implements Interacteable{
 	public void pickUp(){
 		TextManager.say("Really? You thought you could pick up an entire "
 				      + name + "? You're not Guybrush Threepwood. Try something else");
+	}	
+
+	@Override
+	public void open(){
+		TextManager.say("You pull on pretty much every part of the " + name + " but you cannot find a way to 'open' it");
+	}
+
+	@Override
+	public void close(){
+		TextManager.say("You're not even really sure what closing would mean when it comes to this object.");
 	}
 
 	@Override

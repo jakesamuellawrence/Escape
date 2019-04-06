@@ -28,18 +28,31 @@ public class TextManager{
 	static void parseCommand(String command){
 		command = command.toLowerCase();
 		String[] command_words = command.split(" ");
-		if(command_words[0].equals("look") && command_words[1].equals("at")){
-			String target_name = command_words[2];
-			for(int i = 3; i < command_words.length; i++){
-				target_name +=  " " + command_words[i];
-			}
-			Interacteable target = findItem(target_name);
-			if(target != null){
-				target.lookAt();
-			}
+		if(command_words[0].equals("look")){
+			parseLookCommand(command_words);
+		}
+		else{
+			say("You're not quite sure how to '" + command + "' in this situation");
 		}
 		say("");
 		parseCommand(ask("What would you like to do?"));
+	}
+	
+	static void parseLookCommand(String[] command_words){
+		String target_name = "";
+		for(int i = 1; i < command_words.length; i++){
+			if(!command_words[i].equals("at")){
+				target_name += command_words[i] + " ";
+			}
+		}
+		target_name = target_name.trim();
+		Interacteable target = findItem(target_name);
+		if(target != null){
+			target.lookAt();
+		}
+		else{
+			say("You look around the room but you can't seem to find a " + target_name + " :(");
+		}
 	}
 	
 	static Interacteable findItem(String target_name){
@@ -48,7 +61,6 @@ public class TextManager{
 				return in_room.get(i);
 			}
 		}
-		say("You look around the room but you can't seem to find a " + target_name + " :(");
 		return null;
 	}
 	
