@@ -29,7 +29,10 @@ public class TextManager{
 		command = command.toLowerCase();
 		String[] command_words = command.split(" ");
 		if(command_words[0].equals("look")){
-			parseLookCommand(command_words);
+			handleLookCommand(command_words);
+		}
+		else if(command_words[0].equals("use")){
+			handleUseCommand(command_words);
 		}
 		else{
 			say("You're not quite sure how to '" + command + "' in this situation");
@@ -38,7 +41,7 @@ public class TextManager{
 		parseCommand(ask("What would you like to do?"));
 	}
 	
-	static void parseLookCommand(String[] command_words){
+	static void handleLookCommand(String[] command_words){
 		String target_name = "";
 		for(int i = 1; i < command_words.length; i++){
 			if(!command_words[i].equals("at")){
@@ -53,6 +56,47 @@ public class TextManager{
 		else{
 			say("You look around the room but you can't seem to find a " + target_name + " :(");
 		}
+	}
+	
+	static void handleUseCommand(String[] command_words){
+		String target_name = "";
+		for(int i = 1; i < command_words.length; i++){
+			if(!command_words[i].equals("with")){
+				target_name += command_words[i] + " ";
+			}
+			else{
+				handleUseWithCommand(command_words, target_name, i);
+				return;
+			}
+		}
+		target_name = target_name.trim();
+		Interacteable target = findItem(target_name);
+		if(target != null){
+			target.use();
+		}
+		else{
+			say("You look around the room but you can't seem to find a " + target_name + " :(");
+		}
+	}
+	
+	static void handleUseWithCommand(String[] command_words, String target_1_name, int index_of_with){
+		String target_2_name = "";
+		for(int i = index_of_with+1; i < command_words.length; i++){
+			target_2_name += command_words[i] + " ";
+		}
+		target_1_name = target_1_name.trim();
+		target_2_name = target_2_name.trim();
+		Interacteable target_1 = findItem(target_1_name);
+		Interacteable target_2 = findItem(target_2_name);
+		if(target_1 == null){
+			say("You look around the room but you can't seem to find a " + target_1_name + " :(");
+			return;
+		}
+		if(target_2 == null){
+			say("You look around the room but you can't seem to find a " + target_2_name + " :(");
+			return;
+		}
+		target_1.useWith(target_2);
 	}
 	
 	static Interacteable findItem(String target_name){
