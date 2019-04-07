@@ -35,6 +35,15 @@ public class InteractionManager{
 		else if(command_words[0].equals("use")){
 			handleUseCommand(command_words);
 		}
+		else if(command_words[0].equals("pick")){
+			handlePickUpCommand(command_words);
+		}
+		else if(command_words[0].equals("open")){
+			handleOpenCommand(command_words);
+		}
+		else if(command_words[0].equals("close")){
+			handleCloseCommand(command_words);
+		}
 		else{
 			say("You're not quite sure how to '" + command + "' in this situation");
 		}
@@ -98,6 +107,53 @@ public class InteractionManager{
 			return;
 		}
 		target_1.useWith(target_2);
+	}
+	
+	static void handlePickUpCommand(String[] command_words){
+		String target_name = "";
+		for(int i = 1; i < command_words.length; i++){
+			if(!command_words[i].equals("up")){
+				target_name += command_words[i] + " ";
+			}
+		}
+		target_name = target_name.trim();
+		Item target = current_room.findItem(target_name);
+		if(target != null){
+			target.pickUp();
+		}
+		else{
+			say("You look around the room but you can't seem to find a " + target_name + " :(");
+		}
+	}
+	
+	static void handleOpenCommand(String[] command_words){
+		String target_name = "";
+		for(int i = 1; i < command_words.length; i++){
+			target_name = command_words[i] + " ";
+		}
+		target_name = target_name.trim();
+		Item target = current_room.findItem(target_name);
+		if(target != null){
+			target.open();
+		}
+		else{
+			say("You look around the room but you can't seem to find a " + target_name + " :(");
+		}
+	}
+	
+	static void handleCloseCommand(String[] command_words){
+		String target_name = "";
+		for(int i = 1; i < command_words.length; i++){
+			target_name = command_words[i] + " ";
+		}
+		target_name = target_name.trim();
+		Item target = current_room.findItem(target_name);
+		if(target != null){
+			target.close();
+		}
+		else{
+			say("You look around the room but you can't seem to find a " + target_name + " :(");
+		}
 	}
 	
 	public static void say(String message){

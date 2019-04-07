@@ -25,8 +25,8 @@ public class DefaultItem implements Item{
 	
 	@Override
 	public void pickUp(){
-		InteractionManager.say("Really? You thought you could pick up an entire "
-				      + name + "? You're not Guybrush Threepwood. Try something else");
+		InteractionManager.say("Really? You thought you could fit an entire "
+				      + name + " in your pocket? You're not Guybrush Threepwood. Try something else");
 	}	
 
 	@Override
@@ -36,7 +36,7 @@ public class DefaultItem implements Item{
 
 	@Override
 	public void close(){
-		InteractionManager.say("You're not even really sure what closing would mean when it comes to this object.");
+		InteractionManager.say("You're not even really sure what closing would mean when it comes to a " + name);
 	}
 
 	@Override
