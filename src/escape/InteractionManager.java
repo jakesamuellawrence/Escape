@@ -1,5 +1,6 @@
 package escape;
 
+import java.io.Console;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -43,6 +44,9 @@ public class InteractionManager{
 		}
 		else if(command_words[0].equals("close")){
 			handleCloseCommand(command_words);
+		}
+		else if(command_words[0].equals("exit")){
+			System.exit(0);
 		}
 		else{
 			say("You're not quite sure how to '" + command + "' in this situation");
@@ -157,7 +161,11 @@ public class InteractionManager{
 	}
 	
 	public static void say(String message){
-		System.out.println(message);
+		System.out.println(WordWrapper.wordWrap(message, 100));
+	}
+	
+	public static void sayBox(String message){
+		System.out.println(WordWrapper.drawBox(message, 100));
 	}
 	
 	public static String ask(String question){
