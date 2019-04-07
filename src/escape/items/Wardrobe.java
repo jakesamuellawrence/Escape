@@ -9,7 +9,7 @@ public class Wardrobe extends DefaultItem{
 	
 	public Wardrobe(){
 		name = "wardrobe";
-		description = "an old-looking wooden wardrobe";
+		description = "an old-looking wooden WARDROBE";
 	}
 	
 	@Override

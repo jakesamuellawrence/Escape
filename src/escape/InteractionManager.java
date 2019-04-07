@@ -10,6 +10,8 @@ import escape.rooms.Room;
 
 public class InteractionManager{
 	
+	static ArrayList<Item> inventory = new ArrayList<Item>();
+	
 	static ArrayList<Room> rooms = new ArrayList<Room>();
 	static Room current_room;
 	
@@ -18,6 +20,20 @@ public class InteractionManager{
 	public static void initialise(){
 		rooms.add(new Bedroom());
 		current_room = rooms.get(0);
+	}
+	
+	public static void addItemToInventory(Item item){
+		inventory.add(item);
+		current_room.removeItem(item);
+	}
+
+	public static Item findInventoryItem(String target_name){
+		for(int i = 0; i < inventory.size(); i++){
+			if(inventory.get(i).getName().equals(target_name)){
+				return inventory.get(i);
+			}
+		}
+		return null;
 	}
 	
 	public static void decribeRoom(){
@@ -64,12 +80,14 @@ public class InteractionManager{
 		}
 		target_name = target_name.trim();
 		Item target = current_room.findItem(target_name);
-		if(target != null){
-			target.lookAt();
+		if(target == null){
+			target = findInventoryItem(target_name);
+			if(target == null){
+				say("You look around the room and fish around your pockets but you can't seem to find a " + target_name + " :(");
+				return;
+			}
 		}
-		else{
-			say("You look around the room but you can't seem to find a " + target_name + " :(");
-		}
+		target.lookAt();
 	}
 	
 	static void handleUseCommand(String[] command_words){
@@ -85,12 +103,14 @@ public class InteractionManager{
 		}
 		target_name = target_name.trim();
 		Item target = current_room.findItem(target_name);
-		if(target != null){
-			target.use();
+		if(target == null){
+			target = findInventoryItem(target_name);
+			if(target == null){
+				say("You look around the room and fish around your pockets but you can't seem to find a " + target_name + " :(");
+				return;
+			}
 		}
-		else{
-			say("You look around the room but you can't seem to find a " + target_name + " :(");
-		}
+		target.use();
 	}
 	
 	static void handleUseWithCommand(String[] command_words, String target_1_name, int index_of_with){
@@ -100,17 +120,17 @@ public class InteractionManager{
 		}
 		target_1_name = target_1_name.trim();
 		target_2_name = target_2_name.trim();
-		Item target_1 = current_room.findItem(target_1_name);
+		Item target_1 = findInventoryItem(target_1_name);
 		Item target_2 = current_room.findItem(target_2_name);
 		if(target_1 == null){
-			say("You look around the room but you can't seem to find a " + target_1_name + " :(");
+			say("You fish around in your pockets but you can't seem to find a " + target_1_name + " :(");
 			return;
 		}
 		if(target_2 == null){
 			say("You look around the room but you can't seem to find a " + target_2_name + " :(");
 			return;
 		}
-		target_1.useWith(target_2);
+		target_2.useWith(target_1);
 	}
 	
 	static void handlePickUpCommand(String[] command_words){

@@ -7,7 +7,7 @@ public class WordWrapper {
         int currentWidth = 0;
 
         //Parse out tabs and new lines
-        text = text.replaceAll("[\t\n]", " ");
+//        text = text.replaceAll("[\t\n]", " ");
         words = text.split(delim);
 
         //Rewrap to new width
