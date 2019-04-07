@@ -29,7 +29,7 @@ public class InteractionManager{
 	static void parseCommand(String command){
 		command = command.toLowerCase();
 		String[] command_words = command.split(" ");
-		if(command_words[0].equals("look")){
+		if(command_words[0].equals("look") || command_words[0].equals("investigate")){
 			handleLookCommand(command_words);
 		}
 		else if(command_words[0].equals("use")){
@@ -105,7 +105,7 @@ public class InteractionManager{
 	}
 	
 	public static String ask(String question){
-		System.out.println(question);
+		say(question);
 		return input_reader.nextLine();
 	}
 }
