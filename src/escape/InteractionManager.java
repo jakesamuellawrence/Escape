@@ -3,24 +3,25 @@ package escape;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import escape.items.Interacteable;
-import escape.items.Wardrobe;
+import escape.items.Item;
+import escape.rooms.Bedroom;
+import escape.rooms.Room;
 
-public class TextManager{
+public class InteractionManager{
 	
-	static ArrayList<Interacteable> in_room = new ArrayList<Interacteable>();
+	static ArrayList<Room> rooms = new ArrayList<Room>();
+	static Room current_room;
 	
 	static Scanner input_reader = new Scanner(System.in);
 	
 	public static void initialise(){
-		in_room.add(new Wardrobe());
+		rooms.add(new Bedroom());
+		current_room = rooms.get(0);
 	}
 	
 	public static void decribeRoom(){
 		say("Looking around the room you see: ");
-		for(int i = 0; i < in_room.size(); i++){
-			say(in_room.get(i).getDescription());
-		}
+		say(current_room.getDescription());
 		say("");
 		parseCommand(ask("What would you like to do?"));
 	}
@@ -49,7 +50,7 @@ public class TextManager{
 			}
 		}
 		target_name = target_name.trim();
-		Interacteable target = findItem(target_name);
+		Item target = current_room.findItem(target_name);
 		if(target != null){
 			target.lookAt();
 		}
@@ -70,7 +71,7 @@ public class TextManager{
 			}
 		}
 		target_name = target_name.trim();
-		Interacteable target = findItem(target_name);
+		Item target = current_room.findItem(target_name);
 		if(target != null){
 			target.use();
 		}
@@ -86,8 +87,8 @@ public class TextManager{
 		}
 		target_1_name = target_1_name.trim();
 		target_2_name = target_2_name.trim();
-		Interacteable target_1 = findItem(target_1_name);
-		Interacteable target_2 = findItem(target_2_name);
+		Item target_1 = current_room.findItem(target_1_name);
+		Item target_2 = current_room.findItem(target_2_name);
 		if(target_1 == null){
 			say("You look around the room but you can't seem to find a " + target_1_name + " :(");
 			return;
@@ -97,15 +98,6 @@ public class TextManager{
 			return;
 		}
 		target_1.useWith(target_2);
-	}
-	
-	static Interacteable findItem(String target_name){
-		for(int i = 0; i < in_room.size(); i++){
-			if(in_room.get(i).getName().equals(target_name)){
-				return in_room.get(i);
-			}
-		}
-		return null;
 	}
 	
 	public static void say(String message){
