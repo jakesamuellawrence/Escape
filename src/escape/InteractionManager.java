@@ -93,7 +93,7 @@ public class InteractionManager{
 	static void handleUseCommand(String[] command_words){
 		String target_name = "";
 		for(int i = 1; i < command_words.length; i++){
-			if(!command_words[i].equals("with")){
+			if(!command_words[i].equals("with") && !command_words[i].equals("on")){
 				target_name += command_words[i] + " ";
 			}
 			else{
@@ -153,7 +153,7 @@ public class InteractionManager{
 	static void handleOpenCommand(String[] command_words){
 		String target_name = "";
 		for(int i = 1; i < command_words.length; i++){
-			target_name = command_words[i] + " ";
+			target_name += command_words[i] + " ";
 		}
 		target_name = target_name.trim();
 		Item target = current_room.findItem(target_name);
@@ -168,7 +168,7 @@ public class InteractionManager{
 	static void handleCloseCommand(String[] command_words){
 		String target_name = "";
 		for(int i = 1; i < command_words.length; i++){
-			target_name = command_words[i] + " ";
+			target_name += command_words[i] + " ";
 		}
 		target_name = target_name.trim();
 		Item target = current_room.findItem(target_name);

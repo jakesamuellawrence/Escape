@@ -20,17 +20,40 @@ public class Wardrobe extends DefaultItem{
 	}
 	
 	@Override
+	public void useWith(Item item){
+		if(item instanceof HeartKey){
+			if(!open){
+				if(locked){
+					locked = false;
+					InteractionManager.say("You slide the key in and twist. After a moment you hear a clunk from within the door. "
+							             + "It should be unlocked now.");
+				}
+				else if(!locked){
+					locked = true;
+					InteractionManager.say("You slide the key in and twist. After a moment you hear a clunk from within the door. "
+							             + "It should be locked now.");
+				}
+			}
+			else if(open){
+				InteractionManager.say("You realise there's not much use using a key on something that's open...");
+			}
+		}
+	}
+	
+	@Override
 	public void open(){
-		if(locked){
-			InteractionManager.say("You tug on the handle of the door of the wardrobe but it won't budge. Whatever maniac locked you in "
-		                         + "here probably locked it.");
+		if(!open){
+			if(locked){
+				InteractionManager.say("You tug on the handle of the wardrobe, but it just won't budge");
+			}
+			else if(!locked){
+				InteractionManager.say("You tug on the handle of the wardrobe, and it swings open. You peer inside and release a "
+						             + "quick gasp. Before you you see a D I C K B U T T");
+				open = true;
+			}
 		}
-		else if (!locked && !open){
-			InteractionManager.say("You tug on the handle swings open and you see inside "); // NEEDS MORE DECRIPTION ABOUT DRESS AND SUCH
-			open = false;
-		}
-		else if(!locked && open){
-			InteractionManager.say("Emm, it's already open...?");
+		else if(open){
+			InteractionManager.say("It's already open...");
 		}
 	}
 	
