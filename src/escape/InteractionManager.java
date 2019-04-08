@@ -20,6 +20,8 @@ public class InteractionManager{
 	public static void initialise(){
 		rooms.add(new Bedroom());
 		current_room = rooms.get(0);
+		describeRoom();
+		parseCommand(ask("What would you like to do? (type help if you're unsure how to do something)"));
 	}
 	
 	public static void addItemToInventory(Item item){
@@ -36,11 +38,9 @@ public class InteractionManager{
 		return null;
 	}
 	
-	public static void decribeRoom(){
+	public static void describeRoom(){
 		say("Looking around the room you see: ");
 		say(current_room.getDescription());
-		say("");
-		parseCommand(ask("What would you like to do?"));
 	}
 	
 	static void parseCommand(String command){
@@ -60,6 +60,17 @@ public class InteractionManager{
 		}
 		else if(command_words[0].equals("close")){
 			handleCloseCommand(command_words);
+		}
+		else if(command_words[0].equals("help")){
+			say("words in CAPITALS represent the names of objects you can interact with.");
+			say("The following commands can be used to interact with them:");
+			say("look at / investigate [object name]");
+			say("use [object name]");
+			say("use [object in pockets] with/on [object in room]");
+			say("pick up [object in room]");
+			say("open [object in room]");
+			say("close [object in room]");
+			say("type exit to close the program");
 		}
 		else if(command_words[0].equals("exit")){
 			System.exit(0);
