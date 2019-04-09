@@ -29,7 +29,7 @@ public class InteractionManager{
 		current_room.removeItem(item);
 	}
 
-	public static Item findInventoryItem(String target_name){
+	public static Item findInventoryItemByName(String target_name){
 		for(int i = 0; i < inventory.size(); i++){
 			if(inventory.get(i).getName().equals(target_name)){
 				return inventory.get(i);
@@ -92,7 +92,7 @@ public class InteractionManager{
 		target_name = target_name.trim();
 		Item target = current_room.findItem(target_name);
 		if(target == null){
-			target = findInventoryItem(target_name);
+			target = findInventoryItemByName(target_name);
 			if(target == null){
 				say("You look around the room and fish around your pockets but you can't seem to find a " + target_name + " :(");
 				return;
@@ -115,7 +115,7 @@ public class InteractionManager{
 		target_name = target_name.trim();
 		Item target = current_room.findItem(target_name);
 		if(target == null){
-			target = findInventoryItem(target_name);
+			target = findInventoryItemByName(target_name);
 			if(target == null){
 				say("You look around the room and fish around your pockets but you can't seem to find a " + target_name + " :(");
 				return;
@@ -131,7 +131,7 @@ public class InteractionManager{
 		}
 		target_1_name = target_1_name.trim();
 		target_2_name = target_2_name.trim();
-		Item target_1 = findInventoryItem(target_1_name);
+		Item target_1 = findInventoryItemByName(target_1_name);
 		Item target_2 = current_room.findItem(target_2_name);
 		if(target_1 == null){
 			say("You fish around in your pockets but you can't seem to find a " + target_1_name + " :(");
@@ -202,5 +202,9 @@ public class InteractionManager{
 	public static String ask(String question){
 		say(question);
 		return input_reader.nextLine();
+	}
+	
+	public static Room getCurrentRoom(){
+		return current_room;
 	}
 }

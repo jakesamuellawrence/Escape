@@ -39,7 +39,7 @@ public class DefaultRoom implements Room{
 	public String getDescription(){
 		String description = "";
 		for(int i = 0; i < items.size(); i++){
-			description += items.get(i).getDescription() + "\n";
+			description += "-" + items.get(i).getDescription() + "\n";
 		}
 		return description;
 	}
