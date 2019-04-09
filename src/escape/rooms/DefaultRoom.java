@@ -2,6 +2,7 @@ package escape.rooms;
 
 import java.util.ArrayList;
 
+import escape.InteractionManager;
 import escape.items.Item;
 
 public class DefaultRoom implements Room{
@@ -29,18 +30,17 @@ public class DefaultRoom implements Room{
 	public void removeItem(Item item){
 		items.remove(item);
 	}
+	
+	@Override
+	public void describeRoom(){
+		InteractionManager.say("Looking around the room, you see: ");
+		for(int i = 0; i < items.size(); i++){
+			InteractionManager.say(items.get(i).getDescription());
+		}
+	}
 
 	@Override
 	public String getName(){
 		return name;
-	}
-	
-	@Override
-	public String getDescription(){
-		String description = "";
-		for(int i = 0; i < items.size(); i++){
-			description += "-" + items.get(i).getDescription() + "\n";
-		}
-		return description;
 	}
 }

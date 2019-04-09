@@ -20,7 +20,8 @@ public class InteractionManager{
 	public static void initialise(){
 		rooms.add(new Bedroom());
 		current_room = rooms.get(0);
-		describeRoom();
+		current_room.describeRoom();
+		say("");
 		parseCommand(ask("What would you like to do? (type help if you're unsure how to do something)"));
 	}
 	
@@ -47,11 +48,6 @@ public class InteractionManager{
 		for(int i = 0; i < inventory.size(); i++){
 			say("-a " + inventory.get(i).getName());
 		}
-	}
-	
-	public static void describeRoom(){
-		say("Looking around the room you see: ");
-		say(current_room.getDescription());
 	}
 	
 	static void parseCommand(String command){
@@ -109,7 +105,7 @@ public class InteractionManager{
 		}
 		target_name = target_name.trim();
 		if(target_name.contains("around")){
-			describeRoom();
+			current_room.describeRoom();
 			return;
 		}
 		if(target_name.contains("pockets")){

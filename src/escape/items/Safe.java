@@ -8,13 +8,20 @@ public class Safe extends DefaultItem{
 
 	public Safe(){
 		name = "safe";
-		description = "a SAFE built into the wall, with a small display and numberpad for entering in a keycode";
+		description = "a SAFE built into the wall";
+	}
+	
+	@Override
+	public void lookAt(){
+		InteractionManager.say("You look at the safe. There's a small display and a keypad to one side of the safe, which you reckon "
+				             + "you'd probably have to enter the keycode with.");
 	}
 	
 	@Override
 	public void open(){
 		if(!open){
-			InteractionManager.say("You tug on the door but it's locked. You're gonna need to input the right combination to get into it.");
+			InteractionManager.say("You tug on the door but it's locked. Seeing the numberpad next to the door, you realise "
+					             + "you're probably going to have to find the right keycode to unlock it.");
 			String combination = InteractionManager.ask("What combination do you want to enter?");
 			if(combination.equals("1803")){
 				open = true;
