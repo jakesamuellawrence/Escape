@@ -38,6 +38,17 @@ public class InteractionManager{
 		return null;
 	}
 	
+	public static void describeInventory(){
+		if(inventory.size() == 0){
+			say("You fish around in your pockets but cannot find anything");
+			return;
+		}
+		say("fishing around in your pockets you find: ");
+		for(int i = 0; i < inventory.size(); i++){
+			say("-a " + inventory.get(i).getName());
+		}
+	}
+	
 	public static void describeRoom(){
 		say("Looking around the room you see: ");
 		say(current_room.getDescription());
@@ -62,15 +73,7 @@ public class InteractionManager{
 			handleCloseCommand(command_words);
 		}
 		else if(command_words[0].equals("help")){
-			say("words in CAPITALS represent the names of objects you can interact with.");
-			say("The following commands can be used to interact with them:");
-			say("look at / investigate [object name]");
-			say("use [object name]");
-			say("use [object in pockets] with/on [object in room]");
-			say("pick up [object in room]");
-			say("open [object in room]");
-			say("close [object in room]");
-			say("type exit to close the program");
+			displayHelp();
 		}
 		else if(command_words[0].equals("exit")){
 			System.exit(0);
@@ -82,6 +85,21 @@ public class InteractionManager{
 		parseCommand(ask("What would you like to do?"));
 	}
 	
+	static void displayHelp(){
+		say("words in CAPITALS represent the names of objects you can interact with.");
+		say("The following commands can be used to interact with them:");
+		say("look at / investigate [object name]");
+		say("-use [object name]");
+		say("-use [object in pockets] with/on [object in room]");
+		say("-pick up [object in room]");
+		say("-open [object in room]");
+		say("-close [object in room]");
+		say("-look around");
+		say("-look in pockets");
+		say("type exit to close the program");
+		say("some variations of the above commands may also work");
+	}
+	
 	static void handleLookCommand(String[] command_words){
 		String target_name = "";
 		for(int i = 1; i < command_words.length; i++){
@@ -90,6 +108,14 @@ public class InteractionManager{
 			}
 		}
 		target_name = target_name.trim();
+		if(target_name.contains("around")){
+			describeRoom();
+			return;
+		}
+		if(target_name.contains("pockets")){
+			describeInventory();
+			return;
+		}
 		Item target = current_room.findItem(target_name);
 		if(target == null){
 			target = findInventoryItemByName(target_name);
