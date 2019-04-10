@@ -14,9 +14,10 @@ public class Wardrobe extends DefaultItem{
 	
 	@Override
 	public void lookAt(){
-		InteractionManager.say("You investigate the wardrobe further, and notice it seems to be made of a deep red mahoganny. "
-				             + "Whomever locked you in this room clearly has expensive tastes. Looking at the door, "
-				             + "you see a strangely shaped keyhole, and next to it the words 'Open me ;)' scrawled on a note");
+		InteractionManager.say("The wardrobe is old looking and shoddy, yet somehow also "
+							 + "exquisitely beautiful. It gives you the feeling of looking at "
+							 + "some kind of archaic and enchanted artifact. Looking closer, "
+				             + "you see a strange keyhole in the shape of a loveheart.");
 	}
 	
 	@Override
@@ -44,11 +45,13 @@ public class Wardrobe extends DefaultItem{
 	public void open(){
 		if(!open){
 			if(locked){
-				InteractionManager.say("You tug on the handle of the wardrobe, but it just won't budge");
+				InteractionManager.say("You tug on the handle of the wardrobe, but it just won't budge. You reckon it's probably locked.");
 			}
 			else if(!locked){
 				InteractionManager.say("You tug on the handle of the wardrobe, and it swings open. You peer inside and release a "
-						             + "quick gasp. Before you you see a D I C K B U T T");
+						             + "quick gasp. Before you you see the most beautiful DRESS you've ever seen. It's not particularly "
+						             + "fancy, and to be honest it's somewhat plain, but something about it just enthralls you immediately.");
+				InteractionManager.getCurrentRoom().addItem(new Dress());
 				open = true;
 			}
 		}
@@ -61,6 +64,7 @@ public class Wardrobe extends DefaultItem{
 	public void close(){
 		if(open){
 			InteractionManager.say("You swing the large mahoganny doors shut and they come together with a clack");
+			InteractionManager.getCurrentRoom().removeItem(InteractionManager.getCurrentRoom().findItem("dress"));
 			open = false;
 		}
 		else if(!open){

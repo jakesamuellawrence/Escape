@@ -46,7 +46,7 @@ public class InteractionManager{
 		}
 		say("fishing around in your pockets you find: ");
 		for(int i = 0; i < inventory.size(); i++){
-			say("-a " + inventory.get(i).getName());
+			say(" - a " + inventory.get(i).getName());
 		}
 	}
 	
@@ -84,14 +84,14 @@ public class InteractionManager{
 	static void displayHelp(){
 		say("words in CAPITALS represent the names of objects you can interact with.");
 		say("The following commands can be used to interact with them:");
-		say("look at / investigate [object name]");
-		say("-use [object name]");
-		say("-use [object in pockets] with/on [object in room]");
-		say("-pick up [object in room]");
-		say("-open [object in room]");
-		say("-close [object in room]");
-		say("-look around");
-		say("-look in pockets");
+		say(" - look at / investigate [object name]");
+		say(" - use [object name]");
+		say(" - use [object in pockets] with/on [object in room]");
+		say(" - pick up [object in room]");
+		say(" - open [object in room]");
+		say(" - close [object in room]");
+		say(" - look around");
+		say(" - look in pockets");
 		say("type exit to close the program");
 		say("some variations of the above commands may also work");
 	}
@@ -190,12 +190,14 @@ public class InteractionManager{
 		}
 		target_name = target_name.trim();
 		Item target = current_room.findItem(target_name);
-		if(target != null){
-			target.open();
+		if(target == null){
+			target = findInventoryItemByName(target_name);
+			if(target == null){
+				say("You look around the room and fish around your pockets but you can't seem to find a " + target_name + " :(");
+				return;
+			}
 		}
-		else{
-			say("You look around the room but you can't seem to find a " + target_name + " :(");
-		}
+		target.open();
 	}
 	
 	static void handleCloseCommand(String[] command_words){
@@ -205,12 +207,14 @@ public class InteractionManager{
 		}
 		target_name = target_name.trim();
 		Item target = current_room.findItem(target_name);
-		if(target != null){
-			target.close();
+		if(target == null){
+			target = findInventoryItemByName(target_name);
+			if(target == null){
+				say("You look around the room and fish around your pockets but you can't seem to find a " + target_name + " :(");
+				return;
+			}
 		}
-		else{
-			say("You look around the room but you can't seem to find a " + target_name + " :(");
-		}
+		target.close();
 	}
 	
 	public static void say(String message){

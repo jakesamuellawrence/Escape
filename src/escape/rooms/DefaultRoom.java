@@ -35,7 +35,7 @@ public class DefaultRoom implements Room{
 	public void describeRoom(){
 		InteractionManager.say("Looking around the room, you see: ");
 		for(int i = 0; i < items.size(); i++){
-			InteractionManager.say(items.get(i).getDescription());
+			InteractionManager.say(" - " + items.get(i).getDescription());
 		}
 	}
 

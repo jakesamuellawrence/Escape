@@ -26,8 +26,8 @@ public class Safe extends DefaultItem{
 			if(combination.equals("1803")){
 				open = true;
 				InteractionManager.say("You enter the code and the display flashes green. After a moment, "
-						             + "you here a click and the door swings open, revealing a strange "
-						             + "HEART-SHAPED KEY sitting in the centre of the safe.");
+						             + "you hear a click and the door swings open, revealing a strange "
+						             + "HEART SHAPED KEY sitting in the centre of the safe.");
 				InteractionManager.getCurrentRoom().addItem(new HeartKey());
 			}
 			else{
@@ -44,9 +44,14 @@ public class Safe extends DefaultItem{
 	public void close(){
 		if(open){
 			InteractionManager.say("You push on the door of the safe and it swings shut with a thud.");
-			InteractionManager.getCurrentRoom().removeItem(InteractionManager.getCurrentRoom().findItem("heart-shaped key"));
+			InteractionManager.getCurrentRoom().removeItem(InteractionManager.getCurrentRoom().findItem("heart shaped key"));
 			open = false;
 		}
+	}
+	
+	@Override
+	public void use(){
+		open();
 	}
 	
 	@Override

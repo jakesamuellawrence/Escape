@@ -5,8 +5,8 @@ import escape.InteractionManager;
 public class HeartKey extends DefaultItem{
 
 	public HeartKey(){
-		name = "heart-shaped key";
-		description = "a long HEART-SHAPED KEY, sitting in an open SAFE.";
+		name = "heart shaped key";
+		description = "a long HEART SHAPED KEY, sitting in an open SAFE.";
 	}
 	
 	@Override
