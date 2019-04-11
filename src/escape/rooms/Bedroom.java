@@ -2,6 +2,7 @@ package escape.rooms;
 
 import java.util.ArrayList;
 
+import escape.items.Cryptex;
 import escape.items.Item;
 import escape.items.OrnateChest;
 import escape.items.Poster;

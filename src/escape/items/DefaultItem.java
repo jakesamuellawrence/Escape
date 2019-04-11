@@ -26,7 +26,7 @@ public class DefaultItem implements Item{
 	@Override
 	public void pickUp(){
 		InteractionManager.say("Really? You thought you could fit an entire "
-				      + name + " in your pocket? You're not Guybrush Threepwood. Try something else");
+				      + name + " in your pocket? Try something else");
 	}	
 
 	@Override

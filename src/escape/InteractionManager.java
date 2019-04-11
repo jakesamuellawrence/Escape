@@ -108,7 +108,7 @@ public class InteractionManager{
 			current_room.describeRoom();
 			return;
 		}
-		if(target_name.contains("pockets")){
+		if(target_name.contains("pocket")){
 			describeInventory();
 			return;
 		}
@@ -221,12 +221,17 @@ public class InteractionManager{
 		System.out.println(WordWrapper.wordWrap(message, 100));
 	}
 	
-	public static void sayBox(String message){
+	public static void sayBoxed(String message){
 		System.out.println(WordWrapper.drawBox(message, 100));
 	}
 	
 	public static String ask(String question){
 		say(question);
+		return input_reader.nextLine();
+	}
+	
+	public static String askBoxed(String question){
+		sayBoxed(question);
 		return input_reader.nextLine();
 	}
 	

@@ -52,10 +52,14 @@ public class OrnateChest extends DefaultItem{
 				InteractionManager.say("This cryptex was Pavloved, ");
 				InteractionManager.say("and sealed with a kiss");
 				open = true;
+				InteractionManager.getCurrentRoom().addItem(new Cryptex());
 			}
 			else{
 				InteractionManager.say("It's already open, using the ring won't do anything");
 			}
+		}
+		else{
+			InteractionManager.say("You can't see anywhere you'd be able to use the " + item.getName());
 		}
 	}
 	

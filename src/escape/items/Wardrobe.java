@@ -39,6 +39,9 @@ public class Wardrobe extends DefaultItem{
 				InteractionManager.say("You realise there's not much use using a key on something that's open...");
 			}
 		}
+		else{
+			InteractionManager.say("You can't see anywhere you'd be able to use the " + item.getName());
+		}
 	}
 	
 	@Override
@@ -63,7 +66,7 @@ public class Wardrobe extends DefaultItem{
 	@Override
 	public void close(){
 		if(open){
-			InteractionManager.say("You swing the large mahoganny doors shut and they come together with a clack");
+			InteractionManager.say("You swing the large wooden doors shut and they come together with a clack");
 			InteractionManager.getCurrentRoom().removeItem(InteractionManager.getCurrentRoom().findItem("dress"));
 			open = false;
 		}

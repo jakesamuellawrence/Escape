@@ -14,14 +14,14 @@ public class Safe extends DefaultItem{
 	@Override
 	public void lookAt(){
 		InteractionManager.say("You look at the safe. There's a small display and a keypad to one side of the safe, which you reckon "
-				             + "you'd probably have to enter the keycode with.");
+				             + "you'd probably have to enter a keycode with.");
 	}
 	
 	@Override
 	public void open(){
 		if(!open){
 			InteractionManager.say("You tug on the door but it's locked. Seeing the numberpad next to the door, you realise "
-					             + "you're probably going to have to find the right keycode to unlock it.");
+					             + "you're probably going to have to enter the right keycode to unlock it.");
 			String combination = InteractionManager.ask("What combination do you want to enter?");
 			if(combination.equals("1803")){
 				open = true;
@@ -46,6 +46,9 @@ public class Safe extends DefaultItem{
 			InteractionManager.say("You push on the door of the safe and it swings shut with a thud.");
 			InteractionManager.getCurrentRoom().removeItem(InteractionManager.getCurrentRoom().findItem("heart shaped key"));
 			open = false;
+		}
+		else{
+			InteractionManager.say("It's already closed...");
 		}
 	}
 	

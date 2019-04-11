@@ -23,8 +23,8 @@ public class Poster extends DefaultItem{
 		else{
 			InteractionManager.say("You read the message written on the back of the poster: ");
 			InteractionManager.say("To unlock my heart,");
-			InteractionManager.say("you must choose a special date");
-			InteractionManager.say("It's not January or June,");
+			InteractionManager.say("you must choose our special date");
+			InteractionManager.say("Between January and June,");
 			InteractionManager.say("this day entwined our fate");
 		}
 	}
@@ -37,8 +37,8 @@ public class Poster extends DefaultItem{
 					             + "you lay it on the floor. You lay it face-down, and notice "
 					             + "a message written on the back: ");
 			InteractionManager.say("To unlock my heart,");
-			InteractionManager.say("you must choose a special date");
-			InteractionManager.say("It's not January or June,");
+			InteractionManager.say("you must choose our special date");
+			InteractionManager.say("Between January and June,");
 			InteractionManager.say("this day entwined our fate");
 			InteractionManager.getCurrentRoom().addItem(new Safe());
 			on_wall = false;
